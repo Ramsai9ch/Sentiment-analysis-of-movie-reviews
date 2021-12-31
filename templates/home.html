@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<style>
+  body{
+      text-align: center;
+      color:#000000;
+      font-family:"Comic Sans MS";
+      background-image: url("/static/images/theather.jpg");
+      background-repeat: no-repeat; 
+      background-size: cover;
+  }
+  label{
+      color: black;
+      font-size: 15px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  textarea{
+      width: 600px;
+      height: 150px;
+  } 
+  button{
+      background-color: white;
+      border-radius: 50%;
+      color: rgba(53, 175, 16, 0.836);
+      font-weight: bold;
+  }
+</style>
+
+
+<div>
+    <h1 style="color: black">Movie Review Page</h1>
+    <br>
+    <form action="/result" method="post">
+        <label><strong>Thank you for watching movie :) !!Kindly Give Your Review Here</strong></label>
+        <br>
+        <textarea name="review" rows="50" placeholder="Enter your words here"></textarea>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

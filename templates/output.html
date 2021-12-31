@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<style>
+  body{
+      font-family:"Comic Sans MS";
+      color:#000000;
+      text-align: center;
+      background-image: url("/static/images/result_page.jpeg");
+      background-repeat: no-repeat; 
+      background-size: cover;
+  }
+  button{
+      background-color: white;
+      border-radius: 50%;
+      color: rgb(170, 131, 57);
+      font-weight: bold;
+  }
+</style>
+
+<div >
+    <form action="/">
+        <br><br><br><br><br>
+        <p style="color: rgb(252, 0, 210)">Your thoughts about movie are :<strong>{{pred}}</strong></p>
+        <br>
+        <button type="submit">OK</button>
+    </form>
+</div>
+  
+{% endblock %}
