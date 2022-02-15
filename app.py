@@ -1,4 +1,5 @@
 import nltk
+import json
 import os.path
 import numpy as np
 from joblib import load
@@ -11,15 +12,26 @@ nltk.download("stopwords")
 model = load("NLP.joblib") 
 vector = load("NLP_VEC.joblib")
 
-if not os.path.isfile("movie_reviews_.db"):
+if not os.path.isfile("movie_reviews_db.db"):
     val = create_movie_db()
     print(val)
 
 app = Flask(__name__)
 
-@app.route("/")
-@app.route("/home", methods=["GET"])
+@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
+    if request.method == "POST":
+        feedback = "NO"
+        data = request.form.to_dict()
+        if "yes" in data.keys():
+            feedback = "YES"
+        data = data["form_data"].replace("\'", "\"")
+        data = json.loads(data)
+        pred = data["pred"]
+        review = data["review"]
+        print(review, pred, feedback)
+        insert_review(review,pred, feedback)
     return render_template("home.html")
 
 
@@ -43,8 +55,11 @@ def result():
         out= "NEGATIVE"
     else:
         out= "POSITIVE"
-    insert_review(review_user,out)
-    return render_template("output.html", pred=out)
+    data = {}
+    data["pred"] = out
+    data["review"] = review_user
+    # insert_review(review_user,out)
+    return render_template("output.html", data=data)
 
 
 if __name__ == "__main__":

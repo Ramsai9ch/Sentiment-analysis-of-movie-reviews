@@ -3,7 +3,8 @@ import sqlite3
 create_db = """
 CREATE TABLE IF NOT EXISTS MOVIE_REVIEWS
 (MOVIE_REVIEW         TEXT    NOT NULL,
-PREDICTION             TEXT    NOT NULL);
+PREDICTION             TEXT    NOT NULL,
+FEEDBACK               TEXT     NOT NULL);
 """
 
 query_for_all = """
@@ -11,10 +12,10 @@ SELECT * FROM MOVIE_REVIEWS
 """
 
 insert_query = """
-INSERT INTO MOVIE_REVIEWS VALUES (?, ?);
+INSERT INTO MOVIE_REVIEWS VALUES (?, ?, ?);
 """
 
-db_name = "movie_reviews_.db"
+db_name = "movie_reviews_db.db"
 
 def create_movie_db():
     conn, cur = opendb(db_name)
@@ -31,9 +32,9 @@ def opendb(db_name):
     return [conn, cur]
 
 
-def insert_review(review, prediction):
+def insert_review(review, prediction, feedback):
     conn, cur = opendb(db_name)
-    res = cur.execute(insert_query, (review, prediction))
+    res = cur.execute(insert_query, (review, prediction, feedback))
     conn.commit()
     conn.close
     return "Inserted Successfully!"    

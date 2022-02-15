@@ -19,11 +19,21 @@
 </style>
 
 <div >
-    <form action="/">
-        <br><br><br><br><br>
-        <p style="color: rgb(252, 0, 210)">Your thoughts about movie are :<strong>{{pred}}</strong></p>
+    <form action="/" method="post">
         <br>
-        <button type="submit">OK</button>
+
+        <p style="color: rgb(252, 0, 210)">Your thoughts about movie are :<strong>{{data["pred"]}}</strong></p>
+        <br><br>
+        <form action="/">
+        <label style="color: rgb(6, 61, 245)"for="yes_no_radio">Is our Intrepretation Correct?</label>
+        <p style="color: rgb(73, 255, 1)">
+        <input type="radio" name="yes">Yes</input>
+        </p>
+        <p style="color: rgb(255, 1, 1)">
+        <input type="radio" name="no">No</input>
+        </p>
+        <textarea name="form_data" style="display: none;">{{data}}</textarea>
+        <button type="submit">Submit</button>
     </form>
 </div>
   
